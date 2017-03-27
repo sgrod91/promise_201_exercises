@@ -1,7 +1,7 @@
 //Solution 2: passing down. use map and spread
 require('any-promise/register/bluebird');
 var Promise = require('bluebird');
-var fs = require('fs');
+var fs = require('fs-promise');
 
 
 function splice2(file1, file2, output) {
@@ -10,11 +10,15 @@ function splice2(file1, file2, output) {
     return [buffer1, fs.readFile(file2)];
   })
   .spread(function(buffer1, buffer2) {
-    var line1 = buffer1.toString().replace(/\n$/,"").split('/n');
-    var line2 = buffer2.toString().replace(/\n$/,"").split('/n');
+    var lines1 = buffer1.toString().split('/n');
+    var lines2 = buffer2.toString().split('/n');
+    lines1.map(function(lines1, i) {
+
+    }
+    
 
     var content = [0,1,2].reduce(function(str, x) {
-      str = str + line[x] +' /n' + line2[x] + '\n';
+      str = str + line1[x] +' /n' + line2[x] + '\n';
 
       return str;
     } , '');
